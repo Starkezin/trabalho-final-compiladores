@@ -1,0 +1,36 @@
+main()
+begin
+    let Float entrada;
+    let Float contador;
+    let Float limite;
+    let Float calculo;
+
+    entrada := 0.0;
+    contador := 0.0;
+    limite := 5.0;
+
+    entrada := read();
+
+    while contador < limite
+    begin
+        if contador > 2.0
+        begin
+            calculo := operacao(entrada, contador);
+            print calculo;
+        end
+        
+        if contador < 2.0
+        begin
+            print contador;
+        end
+
+        contador := contador + 1.0;
+    end
+end
+
+def Float operacao(Float a, Float b)
+begin
+    let Float res;
+    res := a * b;
+    return res;
+end
