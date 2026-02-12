@@ -15,24 +15,22 @@ public class CIf extends Comando{
 	} 
 
 	@Override
-	public String geraCodigo() {
-		String codigo = "if (" + exp.geraCodigo() + ") {\n";
-		
-		for (Comando c : bloco) {
-			codigo += c.geraCodigo();
-		}
-		
-		codigo += "}\n";
-		
-		if (bloco != null && !bloco.isEmpty()) {
-			codigo += "else {\n";
-			for (Comando c : bloco) {
-				codigo += c.geraCodigo();
-			}
-			codigo += "}\n";
-		}
-		
-		return codigo;
-	}
+    public String geraCodigo() {
+        StringBuilder sb = new StringBuilder();
+        
+        // Gera apenas o IF
+        sb.append("if (").append(exp.geraCodigo()).append(") {\n");
+        
+        if (bloco != null) {
+            for (Comando c : bloco) {
+                sb.append(c.geraCodigo());
+            }
+        }
+        
+        sb.append("}\n"); 
+        // REMOVIDO: Qualquer geração de 'else' automática
+        
+        return sb.toString();
+    }
 
 }

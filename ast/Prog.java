@@ -12,24 +12,25 @@ public class Prog{
     }
 
     public String geraCodigo() {
-        String codigo = "#include <stdio.h>\n#include <stdlib.h>\n\n";
+        StringBuilder sb = new StringBuilder();
         
-        // Se tiver variáveis globais
-        for (VarDecl v : fun.get(0).vars) {
-            codigo += v.geraCodigo();
+        // 1. Cabeçalhos (Apenas uma vez aqui no topo)
+        sb.append("#include <stdio.h>\n");
+        sb.append("#include <stdlib.h>\n\n");
+        
+        // 2. Funções (Devem vir ANTES da main em C)
+        if (fun != null && !fun.isEmpty()) {
+            for (Fun f : fun) {
+                sb.append(f.geraCodigo());
+            }
         }
         
-        // Gera as funções
-        for (Fun f : fun) {
-            codigo += f.geraCodigo();
-        }
-        
-        // Gera a main
+        // 3. Main
         if (main != null) {
-            codigo += main.geraCodigo();
+            sb.append(main.geraCodigo());
         }
         
-        return codigo;
+        return sb.toString();
     }
 }
 
